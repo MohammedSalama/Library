@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,14 +31,20 @@ Route::get('/admin_dashboard', function () {
 })->middleware(['auth'])->name('admin_dashboard');
 
 Route::group(['middleware' => ['web']], function () {
-
     /**
-     *  CRUD For Company
+     *  CRUD For Book
      */
     Route::get('admin_dashboard/books',[BookController::class,'index'])->name('books');
     Route::post('admin_dashboard/books/store',[BookController::class,'store'])->name('books.store');
     Route::post('admin_dashboard/books/destroy',[BookController::class,'destroy'])->name('books.destroy');
     Route::post('admin_dashboard/books/{id}',[BookController::class,'update'])->name('books.update');
+    /**
+     *  CRUD For Category
+     */
+    Route::get('admin_dashboard/categories',[CategoryController::class,'index'])->name('categories');
+    Route::post('admin_dashboard/categories/store',[CategoryController::class,'store'])->name('categories.store');
+    Route::post('admin_dashboard/categories/destroy',[CategoryController::class,'destroy'])->name('categories.destroy');
+    Route::post('admin_dashboard/categories/{id}',[CategoryController::class,'update'])->name('categories.update');
 });
 
 
